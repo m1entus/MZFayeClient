@@ -492,15 +492,8 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
             return;
         }
 
-        NSError *error = nil;
-        MZFayeMessage *fayeMessage = [MZFayeMessage modelWithDictionary:message error:&error];
+        MZFayeMessage *fayeMessage = [MZFayeMessage messageFromDictionary:message];
 
-        if (error) {
-            if ([self.delegate respondsToSelector:@selector(fayeClient:didFailDeserializeMessage:withError:)]) {
-                [self.delegate fayeClient:self didFailDeserializeMessage:message withError:error];
-            }
-            break;
-        }
         if ([fayeMessage.channel isEqualToString:MZFayeClientBayeuxChannelHandshake]) {
 
             if ([fayeMessage.successful boolValue]) {

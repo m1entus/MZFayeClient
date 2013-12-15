@@ -24,7 +24,7 @@ self.client = [[MZFayeClient alloc] initWithURL:[NSURL URLWithString:@"ws://loca
 
 ## Delagate
 
-``` objective-c
+
 @protocol MZFayeClientDelegate <NSObject>
 @optional
 
@@ -38,7 +38,7 @@ self.client = [[MZFayeClient alloc] initWithURL:[NSURL URLWithString:@"ws://loca
 - (void)fayeClient:(MZFayeClient *)client didReceiveMessage:(NSDictionary *)messageData fromChannel:(NSString *)channel;
 
 @end
-```
+
 
 ## Faye Server
 If you can to run a Faye server to test the client, you can find all the information you need there: <http://faye.jcoglan.com/>
@@ -50,14 +50,14 @@ gem install faye thin eventmachine
 rackup faye.ru -s thin -E production
 ```
 
+```
+curl http://localhost:9292/faye -d 'message={"channel":"/server", "data":"hello"}'
+```
+
 ##Dependencies
 #### SocketRocket
 A conforming WebSocket (RFC 6455) client library maintained by Square, 
 <https://github.com/square/SocketRocket>
-
-#### Mantle
-Mantle makes it easy to write a simple model layer for your Cocoa or Cocoa Touch application, 
-<https://github.com/MantleFramework/Mantle>
 
 #### Base64
 Objective-C Base64 Additions for NSData and NSString

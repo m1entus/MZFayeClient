@@ -25,9 +25,9 @@
         NSLog(@"Server %@",message);
     }];
 
-    [self.client subscribeToChannel:@"/browser" usingBlock:^(NSDictionary *message) {
-        NSLog(@"Browser %@",message);
-    }];
+//    [self.client subscribeToChannel:@"/browser" usingBlock:^(NSDictionary *message) {
+//        NSLog(@"Browser %@",message);
+//    }];
 
 
 //    [self.client.extensions setObject:@"test" forKey:@"test"];

@@ -24,9 +24,8 @@
 //  THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <Mantle.h>
 
-@interface MZFayeMessage : MTLModel <MTLJSONSerializing>
+@interface MZFayeMessage : NSObject
 
 @property (nonatomic, strong) NSString *Id;
 @property (nonatomic, strong) NSString *channel;
@@ -42,5 +41,7 @@
 @property (nonatomic, strong) NSDate *timestamp;
 @property (nonatomic, strong) NSDictionary *data;
 @property (nonatomic, strong) NSDictionary *ext;
+
++ (instancetype)messageFromDictionary:(NSDictionary *)dictionary;
 
 @end

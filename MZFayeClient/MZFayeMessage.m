@@ -27,24 +27,30 @@
 
 @implementation MZFayeMessage
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey
+- (instancetype)initFromDictionary:(NSDictionary *)dictionary
 {
-    return @{
-             @"channel": @"channel",
-             @"clientId": @"clientId",
-             @"successful": @"successful",
-             @"authSuccessful": @"authSuccessful",
-             @"version": @"version",
-             @"minimumVersion": @"minimumVersion",
-             @"supportedConnectionTypes": @"supportedConnectionTypes",
-             @"advice": @"advice",
-             @"error": @"error",
-             @"subscription": @"subscription",
-             @"timestamp": @"timestamp",
-             @"data": @"data",
-             @"ext": @"ext",
-             @"Id": @"id"
-             };
+    if (self = [super init]) {
+        self.Id = dictionary[@"id"];
+        self.channel = dictionary[@"channel"];
+        self.clientId = dictionary[@"clientId"];
+        self.successful = @([dictionary[@"successful"] boolValue]);
+        self.authSuccessful = @([dictionary[@"authSuccessful"] boolValue]);
+        self.version = dictionary[@"version"];
+        self.minimumVersion = dictionary[@"minimumVersion"];
+        self.supportedConnectionTypes = dictionary[@"supportedConnectionTypes"];
+        self.advice = dictionary[@"advice"];
+        self.error = dictionary[@"error"];
+        self.subscription = dictionary[@"subscription"];
+        self.timestamp = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"timestamp"] timeInterval]];
+        self.data = dictionary[@"data"];
+        self.ext = dictionary[@"ext"];
+    }
+    return self;
+}
+
++ (instancetype)messageFromDictionary:(NSDictionary *)dictionary
+{
+    return [[[self class] alloc] initFromDictionary:dictionary];
 }
 
 @end
