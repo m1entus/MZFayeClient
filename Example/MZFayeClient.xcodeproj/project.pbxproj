@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06074165185E0956006A1040 /* MZFayeClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 06074162185E0956006A1040 /* MZFayeClient.m */; };
-		06074166185E0956006A1040 /* MZFayeMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06074164185E0956006A1040 /* MZFayeMessage.m */; };
 		0623449318592B2F0052DB3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449218592B2F0052DB3E /* Foundation.framework */; };
 		0623449518592B2F0052DB3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449418592B2F0052DB3E /* CoreGraphics.framework */; };
 		0623449718592B2F0052DB3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449618592B2F0052DB3E /* UIKit.framework */; };
@@ -37,10 +35,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06074161185E0956006A1040 /* MZFayeClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MZFayeClient.h; path = ../../MZFayeClient/MZFayeClient.h; sourceTree = "<group>"; };
-		06074162185E0956006A1040 /* MZFayeClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MZFayeClient.m; path = ../../MZFayeClient/MZFayeClient.m; sourceTree = "<group>"; };
-		06074163185E0956006A1040 /* MZFayeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MZFayeMessage.h; path = ../../MZFayeClient/MZFayeMessage.h; sourceTree = "<group>"; };
-		06074164185E0956006A1040 /* MZFayeMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MZFayeMessage.m; path = ../../MZFayeClient/MZFayeMessage.m; sourceTree = "<group>"; };
 		0623448F18592B2F0052DB3E /* MZFayeClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZFayeClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0623449218592B2F0052DB3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0623449418592B2F0052DB3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,10 +118,6 @@
 		0623449818592B2F0052DB3E /* MZFayeClient */ = {
 			isa = PBXGroup;
 			children = (
-				06074161185E0956006A1040 /* MZFayeClient.h */,
-				06074162185E0956006A1040 /* MZFayeClient.m */,
-				06074163185E0956006A1040 /* MZFayeMessage.h */,
-				06074164185E0956006A1040 /* MZFayeMessage.m */,
 				062344A118592B2F0052DB3E /* MZAppDelegate.h */,
 				062344A218592B2F0052DB3E /* MZAppDelegate.m */,
 				062344A418592B2F0052DB3E /* Main.storyboard */,
@@ -301,10 +291,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06074165185E0956006A1040 /* MZFayeClient.m in Sources */,
 				062344A918592B2F0052DB3E /* MZViewController.m in Sources */,
 				0623449F18592B2F0052DB3E /* main.m in Sources */,
-				06074166185E0956006A1040 /* MZFayeMessage.m in Sources */,
 				062344A318592B2F0052DB3E /* MZAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

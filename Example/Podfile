@@ -1,3 +1,2 @@
 platform :ios, '6.0'
-pod 'SocketRocket', '~> 0.3.1-beta2'
-pod 'Base64', '~> 1.0.1'
+pod 'MZFayeClient', '~> 1.0.0'

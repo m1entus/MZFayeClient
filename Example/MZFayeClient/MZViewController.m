@@ -7,7 +7,7 @@
 //
 
 #import "MZViewController.h"
-#import "MZFayeClient.h"
+#import <MZFayeClient.h>
 
 @interface MZViewController () <MZFayeClientDelegate>
 @property (nonatomic, strong) MZFayeClient *client;
