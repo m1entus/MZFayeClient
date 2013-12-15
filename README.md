@@ -24,7 +24,7 @@ self.client = [[MZFayeClient alloc] initWithURL:[NSURL URLWithString:@"ws://loca
 
 ## Delagate
 
-
+```
 @protocol MZFayeClientDelegate <NSObject>
 @optional
 
@@ -38,7 +38,7 @@ self.client = [[MZFayeClient alloc] initWithURL:[NSURL URLWithString:@"ws://loca
 - (void)fayeClient:(MZFayeClient *)client didReceiveMessage:(NSDictionary *)messageData fromChannel:(NSString *)channel;
 
 @end
-
+```
 
 ## Faye Server
 If you can to run a Faye server to test the client, you can find all the information you need there: <http://faye.jcoglan.com/>
