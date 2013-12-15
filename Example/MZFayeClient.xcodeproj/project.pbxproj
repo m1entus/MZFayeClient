@@ -1,0 +1,535 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06074165185E0956006A1040 /* MZFayeClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 06074162185E0956006A1040 /* MZFayeClient.m */; };
+		06074166185E0956006A1040 /* MZFayeMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06074164185E0956006A1040 /* MZFayeMessage.m */; };
+		0623449318592B2F0052DB3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449218592B2F0052DB3E /* Foundation.framework */; };
+		0623449518592B2F0052DB3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449418592B2F0052DB3E /* CoreGraphics.framework */; };
+		0623449718592B2F0052DB3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449618592B2F0052DB3E /* UIKit.framework */; };
+		0623449D18592B2F0052DB3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0623449B18592B2F0052DB3E /* InfoPlist.strings */; };
+		0623449F18592B2F0052DB3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0623449E18592B2F0052DB3E /* main.m */; };
+		062344A318592B2F0052DB3E /* MZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 062344A218592B2F0052DB3E /* MZAppDelegate.m */; };
+		062344A618592B2F0052DB3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 062344A418592B2F0052DB3E /* Main.storyboard */; };
+		062344A918592B2F0052DB3E /* MZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 062344A818592B2F0052DB3E /* MZViewController.m */; };
+		062344AB18592B2F0052DB3E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 062344AA18592B2F0052DB3E /* Images.xcassets */; };
+		062344B218592B2F0052DB3E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062344B118592B2F0052DB3E /* XCTest.framework */; };
+		062344B318592B2F0052DB3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449218592B2F0052DB3E /* Foundation.framework */; };
+		062344B418592B2F0052DB3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449618592B2F0052DB3E /* UIKit.framework */; };
+		062344BC18592B2F0052DB3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 062344BA18592B2F0052DB3E /* InfoPlist.strings */; };
+		062344BE18592B2F0052DB3E /* MZFayeClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 062344BD18592B2F0052DB3E /* MZFayeClientTests.m */; };
+		E00C7DE5D741401BB50E0A39 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A15FC3517F64F34939D2995 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		062344B518592B2F0052DB3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0623448718592B2F0052DB3E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0623448E18592B2F0052DB3E;
+			remoteInfo = MZFayeClient;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		06074161185E0956006A1040 /* MZFayeClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MZFayeClient.h; path = ../../MZFayeClient/MZFayeClient.h; sourceTree = "<group>"; };
+		06074162185E0956006A1040 /* MZFayeClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MZFayeClient.m; path = ../../MZFayeClient/MZFayeClient.m; sourceTree = "<group>"; };
+		06074163185E0956006A1040 /* MZFayeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MZFayeMessage.h; path = ../../MZFayeClient/MZFayeMessage.h; sourceTree = "<group>"; };
+		06074164185E0956006A1040 /* MZFayeMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MZFayeMessage.m; path = ../../MZFayeClient/MZFayeMessage.m; sourceTree = "<group>"; };
+		0623448F18592B2F0052DB3E /* MZFayeClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZFayeClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0623449218592B2F0052DB3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0623449418592B2F0052DB3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0623449618592B2F0052DB3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0623449A18592B2F0052DB3E /* MZFayeClient-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MZFayeClient-Info.plist"; sourceTree = "<group>"; };
+		0623449C18592B2F0052DB3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0623449E18592B2F0052DB3E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		062344A018592B2F0052DB3E /* MZFayeClient-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MZFayeClient-Prefix.pch"; sourceTree = "<group>"; };
+		062344A118592B2F0052DB3E /* MZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAppDelegate.h; sourceTree = "<group>"; };
+		062344A218592B2F0052DB3E /* MZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZAppDelegate.m; sourceTree = "<group>"; };
+		062344A518592B2F0052DB3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		062344A718592B2F0052DB3E /* MZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZViewController.h; sourceTree = "<group>"; };
+		062344A818592B2F0052DB3E /* MZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZViewController.m; sourceTree = "<group>"; };
+		062344AA18592B2F0052DB3E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		062344B018592B2F0052DB3E /* MZFayeClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MZFayeClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		062344B118592B2F0052DB3E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		062344B918592B2F0052DB3E /* MZFayeClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MZFayeClientTests-Info.plist"; sourceTree = "<group>"; };
+		062344BB18592B2F0052DB3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		062344BD18592B2F0052DB3E /* MZFayeClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZFayeClientTests.m; sourceTree = "<group>"; };
+		3E133F42E01E4D6D80C19CB0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		6A15FC3517F64F34939D2995 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0623448C18592B2F0052DB3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0623449518592B2F0052DB3E /* CoreGraphics.framework in Frameworks */,
+				0623449718592B2F0052DB3E /* UIKit.framework in Frameworks */,
+				0623449318592B2F0052DB3E /* Foundation.framework in Frameworks */,
+				E00C7DE5D741401BB50E0A39 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		062344AD18592B2F0052DB3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				062344B218592B2F0052DB3E /* XCTest.framework in Frameworks */,
+				062344B418592B2F0052DB3E /* UIKit.framework in Frameworks */,
+				062344B318592B2F0052DB3E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0623448618592B2F0052DB3E = {
+			isa = PBXGroup;
+			children = (
+				0623449818592B2F0052DB3E /* MZFayeClient */,
+				062344B718592B2F0052DB3E /* MZFayeClientTests */,
+				0623449118592B2F0052DB3E /* Frameworks */,
+				0623449018592B2F0052DB3E /* Products */,
+				3E133F42E01E4D6D80C19CB0 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		0623449018592B2F0052DB3E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0623448F18592B2F0052DB3E /* MZFayeClient.app */,
+				062344B018592B2F0052DB3E /* MZFayeClientTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0623449118592B2F0052DB3E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0623449218592B2F0052DB3E /* Foundation.framework */,
+				0623449418592B2F0052DB3E /* CoreGraphics.framework */,
+				0623449618592B2F0052DB3E /* UIKit.framework */,
+				062344B118592B2F0052DB3E /* XCTest.framework */,
+				6A15FC3517F64F34939D2995 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0623449818592B2F0052DB3E /* MZFayeClient */ = {
+			isa = PBXGroup;
+			children = (
+				06074161185E0956006A1040 /* MZFayeClient.h */,
+				06074162185E0956006A1040 /* MZFayeClient.m */,
+				06074163185E0956006A1040 /* MZFayeMessage.h */,
+				06074164185E0956006A1040 /* MZFayeMessage.m */,
+				062344A118592B2F0052DB3E /* MZAppDelegate.h */,
+				062344A218592B2F0052DB3E /* MZAppDelegate.m */,
+				062344A418592B2F0052DB3E /* Main.storyboard */,
+				062344A718592B2F0052DB3E /* MZViewController.h */,
+				062344A818592B2F0052DB3E /* MZViewController.m */,
+				062344AA18592B2F0052DB3E /* Images.xcassets */,
+				0623449918592B2F0052DB3E /* Supporting Files */,
+			);
+			path = MZFayeClient;
+			sourceTree = "<group>";
+		};
+		0623449918592B2F0052DB3E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0623449A18592B2F0052DB3E /* MZFayeClient-Info.plist */,
+				0623449B18592B2F0052DB3E /* InfoPlist.strings */,
+				0623449E18592B2F0052DB3E /* main.m */,
+				062344A018592B2F0052DB3E /* MZFayeClient-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		062344B718592B2F0052DB3E /* MZFayeClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				062344BD18592B2F0052DB3E /* MZFayeClientTests.m */,
+				062344B818592B2F0052DB3E /* Supporting Files */,
+			);
+			path = MZFayeClientTests;
+			sourceTree = "<group>";
+		};
+		062344B818592B2F0052DB3E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				062344B918592B2F0052DB3E /* MZFayeClientTests-Info.plist */,
+				062344BA18592B2F0052DB3E /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0623448E18592B2F0052DB3E /* MZFayeClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 062344C118592B2F0052DB3E /* Build configuration list for PBXNativeTarget "MZFayeClient" */;
+			buildPhases = (
+				2581D574D9DA431491664F58 /* Check Pods Manifest.lock */,
+				0623448B18592B2F0052DB3E /* Sources */,
+				0623448C18592B2F0052DB3E /* Frameworks */,
+				0623448D18592B2F0052DB3E /* Resources */,
+				91949169BE924C7F9943379A /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MZFayeClient;
+			productName = MZFayeClient;
+			productReference = 0623448F18592B2F0052DB3E /* MZFayeClient.app */;
+			productType = "com.apple.product-type.application";
+		};
+		062344AF18592B2F0052DB3E /* MZFayeClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 062344C418592B2F0052DB3E /* Build configuration list for PBXNativeTarget "MZFayeClientTests" */;
+			buildPhases = (
+				062344AC18592B2F0052DB3E /* Sources */,
+				062344AD18592B2F0052DB3E /* Frameworks */,
+				062344AE18592B2F0052DB3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				062344B618592B2F0052DB3E /* PBXTargetDependency */,
+			);
+			name = MZFayeClientTests;
+			productName = MZFayeClientTests;
+			productReference = 062344B018592B2F0052DB3E /* MZFayeClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0623448718592B2F0052DB3E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MZ;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Michał Zaborowski";
+				TargetAttributes = {
+					062344AF18592B2F0052DB3E = {
+						TestTargetID = 0623448E18592B2F0052DB3E;
+					};
+				};
+			};
+			buildConfigurationList = 0623448A18592B2F0052DB3E /* Build configuration list for PBXProject "MZFayeClient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0623448618592B2F0052DB3E;
+			productRefGroup = 0623449018592B2F0052DB3E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0623448E18592B2F0052DB3E /* MZFayeClient */,
+				062344AF18592B2F0052DB3E /* MZFayeClientTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0623448D18592B2F0052DB3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				062344AB18592B2F0052DB3E /* Images.xcassets in Resources */,
+				0623449D18592B2F0052DB3E /* InfoPlist.strings in Resources */,
+				062344A618592B2F0052DB3E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		062344AE18592B2F0052DB3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				062344BC18592B2F0052DB3E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2581D574D9DA431491664F58 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		91949169BE924C7F9943379A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0623448B18592B2F0052DB3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06074165185E0956006A1040 /* MZFayeClient.m in Sources */,
+				062344A918592B2F0052DB3E /* MZViewController.m in Sources */,
+				0623449F18592B2F0052DB3E /* main.m in Sources */,
+				06074166185E0956006A1040 /* MZFayeMessage.m in Sources */,
+				062344A318592B2F0052DB3E /* MZAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		062344AC18592B2F0052DB3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				062344BE18592B2F0052DB3E /* MZFayeClientTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		062344B618592B2F0052DB3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0623448E18592B2F0052DB3E /* MZFayeClient */;
+			targetProxy = 062344B518592B2F0052DB3E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0623449B18592B2F0052DB3E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0623449C18592B2F0052DB3E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		062344A418592B2F0052DB3E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				062344A518592B2F0052DB3E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		062344BA18592B2F0052DB3E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				062344BB18592B2F0052DB3E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		062344BF18592B2F0052DB3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		062344C018592B2F0052DB3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		062344C218592B2F0052DB3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E133F42E01E4D6D80C19CB0 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MZFayeClient/MZFayeClient-Prefix.pch";
+				INFOPLIST_FILE = "MZFayeClient/MZFayeClient-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		062344C318592B2F0052DB3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E133F42E01E4D6D80C19CB0 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MZFayeClient/MZFayeClient-Prefix.pch";
+				INFOPLIST_FILE = "MZFayeClient/MZFayeClient-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		062344C518592B2F0052DB3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MZFayeClient.app/MZFayeClient";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MZFayeClient/MZFayeClient-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MZFayeClientTests/MZFayeClientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		062344C618592B2F0052DB3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MZFayeClient.app/MZFayeClient";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MZFayeClient/MZFayeClient-Prefix.pch";
+				INFOPLIST_FILE = "MZFayeClientTests/MZFayeClientTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0623448A18592B2F0052DB3E /* Build configuration list for PBXProject "MZFayeClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				062344BF18592B2F0052DB3E /* Debug */,
+				062344C018592B2F0052DB3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		062344C118592B2F0052DB3E /* Build configuration list for PBXNativeTarget "MZFayeClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				062344C218592B2F0052DB3E /* Debug */,
+				062344C318592B2F0052DB3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		062344C418592B2F0052DB3E /* Build configuration list for PBXNativeTarget "MZFayeClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				062344C518592B2F0052DB3E /* Debug */,
+				062344C618592B2F0052DB3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0623448718592B2F0052DB3E /* Project object */;
+}
