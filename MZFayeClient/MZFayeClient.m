@@ -607,9 +607,15 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 }
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
+    self.connected = NO;
+
+    [self clearSubscriptions];
+
     if ([self.delegate respondsToSelector:@selector(fayeClient:didFailWithError:)]) {
         [self.delegate fayeClient:self didFailWithError:error];
     }
+
+    [self reconnect];
 }
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code
                                                      reason:(NSString *)reason wasClean:(BOOL)wasClean
