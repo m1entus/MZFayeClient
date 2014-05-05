@@ -434,7 +434,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 {
     if (self.shouldRetryConnection && self.retryAttempt < self.maximumRetryAttempts) {
 
-        self.reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:self.retryInterval target:self selector:@selector(reconnectTimer:) userInfo:nil repeats:YES];
+        self.reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:self.retryInterval target:self selector:@selector(reconnectTimer:) userInfo:nil repeats:NO];
     }
 }
 
