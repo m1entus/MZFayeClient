@@ -434,7 +434,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 {
     if (self.shouldRetryConnection && self.retryAttempt < self.maximumRetryAttempts) {
 
-        self.reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:self.retryInterval target:self selector:@selector(reconnectTimer:) userInfo:nil repeats:YES];
+        self.reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:self.retryInterval target:self selector:@selector(reconnectTimer:) userInfo:nil repeats:NO];
     }
 }
 
@@ -607,9 +607,15 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 }
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
+    self.connected = NO;
+
+    [self clearSubscriptions];
+
     if ([self.delegate respondsToSelector:@selector(fayeClient:didFailWithError:)]) {
         [self.delegate fayeClient:self didFailWithError:error];
     }
+
+    [self reconnect];
 }
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code
                                                      reason:(NSString *)reason wasClean:(BOOL)wasClean
