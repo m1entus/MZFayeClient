@@ -77,3 +77,7 @@ MZFayeClient uses ARC.
 
 [Twitter](https://twitter.com/iMientus) 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/m1entus/mzfayeclient/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
