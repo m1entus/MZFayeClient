@@ -391,11 +391,12 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
     if (!self.subscribedChannels[channel] || !channel) {
         return;
     }
+    
+    [self.subscribedChannels removeObjectForKey:channel];
+    [self.pendingChannelSubscriptions removeObject:channel];
+    
     if (self.isConnected) {
         [self sendBayeuxUnsubscribeMessageWithChannel:channel];
-    } else {
-        [self.subscribedChannels removeObjectForKey:channel];
-        [self.pendingChannelSubscriptions removeObject:channel];
     }
 }
 
