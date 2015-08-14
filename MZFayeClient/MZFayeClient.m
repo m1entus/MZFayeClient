@@ -587,7 +587,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 
         } else if ([self.openChannelSubscriptions containsObject:fayeMessage.channel]) {
             
-            if ([self.pendingMessages.allKeys containsObject:fayeMessage.Id]) {
+            if ([self.pendingMessages.allKeys containsObject:fayeMessage.Id] && fayeMessage.successful != nil) {
                 // This is a response to a message we published
                 
                 NSDictionary *handlers = self.pendingMessages[fayeMessage.Id];

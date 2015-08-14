@@ -27,30 +27,36 @@
 
 @implementation MZFayeMessage
 
-- (instancetype)initFromDictionary:(NSDictionary *)dictionary
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
-    if (self = [super init]) {
-        self.Id = dictionary[@"id"];
-        self.channel = dictionary[@"channel"];
-        self.clientId = dictionary[@"clientId"];
-        self.successful = @([dictionary[@"successful"] boolValue]);
-        self.authSuccessful = @([dictionary[@"authSuccessful"] boolValue]);
-        self.version = dictionary[@"version"];
-        self.minimumVersion = dictionary[@"minimumVersion"];
-        self.supportedConnectionTypes = dictionary[@"supportedConnectionTypes"];
-        self.advice = dictionary[@"advice"];
-        self.error = dictionary[@"error"];
-        self.subscription = dictionary[@"subscription"];
-        self.timestamp = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"timestamp"] timeInterval]];
-        self.data = dictionary[@"data"];
-        self.ext = dictionary[@"ext"];
+    self = [super init];
+    if (self) {
+        [self importFromDictionary:dictionary];
     }
     return self;
 }
 
 + (instancetype)messageFromDictionary:(NSDictionary *)dictionary
 {
-    return [[[self class] alloc] initFromDictionary:dictionary];
+    return [[[self class] alloc] initWithDictionary:dictionary];
+}
+
+- (void)importFromDictionary:(NSDictionary *)dictionary
+{
+    if (dictionary[@"id"] != nil) {
+        self.Id = dictionary[@"id"];
+    }
+    
+    if (dictionary[@"timestamp"] != nil) {
+        self.timestamp = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"timestamp"] timeInterval]];
+    }
+    
+    NSArray *objectAttributes = @[@"channel", @"clientId", @"successful", @"authSuccessful", @"version", @"minimumVersion", @"supportedConnectionTypes", @"advice", @"error", @"subscription", @"data", @"ext"];
+    for (NSString *attribute in objectAttributes) {
+        if (dictionary[attribute] != nil) {
+            [self setValue:dictionary[attribute] forKey:attribute];
+        }
+    }
 }
 
 @end
