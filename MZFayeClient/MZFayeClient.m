@@ -52,7 +52,8 @@ NSString *const MZFayeClientBayeuxConnectionTypeCallbackPolling = @"callback-pol
 NSString *const MZFayeClientBayeuxConnectionTypeIFrame = @"iframe";
 NSString *const MZFayeClientBayeuxConnectionTypeWebSocket = @"websocket";
 
-NSString *const MZFayeClientWebSocketErrorDomain = @"com.mzfayeclient.error";
+NSString *const MZFayeClientWebSocketErrorDomain = @"com.mzfayeclient.error.web-socket";
+NSString *const MZFayeClientBayeuxErrorDomain = @"com.mzfayeclient.error.bayeux";
 
 NSTimeInterval const MZFayeClientDefaultRetryInterval = 1.0f;
 NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
@@ -493,7 +494,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 - (void)didFailWithMessage:(NSString *)message
 {
     if ([self.delegate respondsToSelector:@selector(fayeClient:didFailWithError:)] && message) {
-        NSError *error = [NSError errorWithDomain:MZFayeClientWebSocketErrorDomain code:-100 userInfo:@{NSLocalizedDescriptionKey : message}];
+        NSError *error = [NSError errorWithDomain:MZFayeClientBayeuxErrorDomain code:MZFayeClientBayeuxErrorReceivedFailureStatus userInfo:@{NSLocalizedDescriptionKey : message}];
         [self.delegate fayeClient:self didFailWithError:error];
     }
 }
@@ -504,7 +505,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 
         if (![message isKindOfClass:[NSDictionary class]]) {
             if ([self.delegate respondsToSelector:@selector(fayeClient:didFailWithError:)]) {
-                NSError *error = [NSError errorWithDomain:MZFayeClientWebSocketErrorDomain code:-100 userInfo:@{NSLocalizedDescriptionKey : @"Message is not kind of NSDicitionary class"}];
+                NSError *error = [NSError errorWithDomain:MZFayeClientBayeuxErrorDomain code:MZFayeClientBayeuxErrorCouldNotParse userInfo:@{NSLocalizedDescriptionKey : @"Message is not kind of NSDicitionary class"}];
                 [self.delegate fayeClient:self didFailWithError:error];
             }
             return;
@@ -602,7 +603,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
                         
                         id fayeErrorOrNull = fayeMessage.error;
                         if (fayeErrorOrNull == nil) fayeErrorOrNull = NSNull.null;
-                        NSError *error = [NSError errorWithDomain:MZFayeClientWebSocketErrorDomain code:-101 userInfo:@{NSLocalizedDescriptionKey : @"The operation could not be completed.", @"fayeError": fayeErrorOrNull}];
+                        NSError *error = [NSError errorWithDomain:MZFayeClientBayeuxErrorDomain code:MZFayeClientBayeuxErrorReceivedFailureStatus userInfo:@{NSLocalizedDescriptionKey : @"Faye server rejected published message", NSLocalizedFailureReasonErrorKey: fayeErrorOrNull}];
                         
                         failureHandler(error);
                     }

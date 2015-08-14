@@ -35,6 +35,12 @@ extern NSString *const MZFayeClientBayeuxChannelSubscribe;
 extern NSString *const MZFayeClientBayeuxChannelUnsubscribe;
 
 extern NSString *const MZFayeClientWebSocketErrorDomain;
+extern NSString *const MZFayeClientBayeuxErrorDomain;
+
+typedef NS_ENUM(NSInteger, MZFayeClientBayeuxError) {
+    MZFayeClientBayeuxErrorReceivedFailureStatus = -100,
+    MZFayeClientBayeuxErrorCouldNotParse = -101,
+};
 
 extern NSTimeInterval const MZFayeClientDefaultRetryInterval;
 extern NSInteger      const MZFayeClientDefaultMaximumAttempts;
