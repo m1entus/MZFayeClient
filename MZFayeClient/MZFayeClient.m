@@ -52,7 +52,8 @@ NSString *const MZFayeClientBayeuxConnectionTypeCallbackPolling = @"callback-pol
 NSString *const MZFayeClientBayeuxConnectionTypeIFrame = @"iframe";
 NSString *const MZFayeClientBayeuxConnectionTypeWebSocket = @"websocket";
 
-NSString *const MZFayeClientWebSocketErrorDomain = @"com.mzfayeclient.error";
+NSString *const MZFayeClientWebSocketErrorDomain = @"com.mzfayeclient.error.web-socket";
+NSString *const MZFayeClientBayeuxErrorDomain = @"com.mzfayeclient.error.bayeux";
 
 NSTimeInterval const MZFayeClientDefaultRetryInterval = 1.0f;
 NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
@@ -64,6 +65,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 @property (nonatomic, readwrite, strong) NSMutableSet *pendingChannelSubscriptions;
 @property (nonatomic, readwrite, strong) NSMutableDictionary *subscribedChannels;
 @property (nonatomic, readwrite, strong) NSMutableDictionary *channelExtensions;
+@property (nonatomic, readwrite, strong) NSMutableDictionary *pendingMessages;
 
 @property (nonatomic, readwrite, strong) NSString *clientId;
 
@@ -137,6 +139,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 
         _channelExtensions = [NSMutableDictionary dictionary];
         _subscribedChannels = [NSMutableDictionary dictionary];
+        _pendingMessages = [NSMutableDictionary dictionary];
         _pendingChannelSubscriptions = [NSMutableSet set];
         _openChannelSubscriptions = [NSMutableSet set];
         _maximumRetryAttempts = MZFayeClientDefaultMaximumAttempts;
@@ -270,7 +273,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
  *  channel
  *  data - The message as an arbitrary JSON encoded object
  */
-- (void)sendBayeuxPublishMessage:(NSDictionary *)messageDictionary toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension
+- (void)sendBayeuxPublishMessage:(NSDictionary *)messageDictionary toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension success:(MZPublishSuccessHandler)successHandler failure:(MZPublishFailureHandler)failureHandler
 {
     if (!(self.isConnected && self.isWebSocketOpen)) {
         [self didFailWithMessage:@"FayeClient not connected to server."];
@@ -294,6 +297,11 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
             [message setObject:extensionForChannel forKey:MZFayeClientBayeuxMessageExtensionKey];
         }
     }
+    
+    NSMutableDictionary *handlers = [NSMutableDictionary dictionaryWithCapacity:2];
+    if (successHandler != nil) handlers[@YES] = [successHandler copy];
+    if (failureHandler != nil) handlers[@NO] = [failureHandler copy];
+    self.pendingMessages[messageId] = [NSDictionary dictionaryWithDictionary:handlers];
 
     [self writeMessageToWebSocket:[message copy]];
 
@@ -311,7 +319,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 {
     self.sentMessageCount++;
 
-    return [[NSString stringWithFormat:@"%d",self.sentMessageCount] base64String];
+    return [[NSString stringWithFormat:@"%ld", (long)self.sentMessageCount] base64String];
 }
 
 #pragma mark - Public methods
@@ -327,12 +335,22 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 
 - (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel
 {
-    [self sendBayeuxPublishMessage:message toChannel:channel usingExtension:nil];
+    [self sendBayeuxPublishMessage:message toChannel:channel usingExtension:nil success:nil failure:nil];
+}
+
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel success:(MZPublishSuccessHandler)successHandler failure:(MZPublishFailureHandler)failureHandler
+{
+    [self sendBayeuxPublishMessage:message toChannel:channel usingExtension:nil success:successHandler failure:failureHandler];
 }
 
 - (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension
 {
-    [self sendBayeuxPublishMessage:message toChannel:channel usingExtension:extension];
+    [self sendBayeuxPublishMessage:message toChannel:channel usingExtension:extension success:nil failure:nil];
+}
+
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension success:(MZPublishSuccessHandler)successHandler failure:(MZPublishFailureHandler)failureHandler
+{
+    [self sendBayeuxPublishMessage:message toChannel:channel usingExtension:extension success:successHandler failure:failureHandler];
 }
 
 - (BOOL)connectToURL:(NSURL *)url
@@ -476,7 +494,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 - (void)didFailWithMessage:(NSString *)message
 {
     if ([self.delegate respondsToSelector:@selector(fayeClient:didFailWithError:)] && message) {
-        NSError *error = [NSError errorWithDomain:MZFayeClientWebSocketErrorDomain code:-100 userInfo:@{NSLocalizedDescriptionKey : message}];
+        NSError *error = [NSError errorWithDomain:MZFayeClientBayeuxErrorDomain code:MZFayeClientBayeuxErrorReceivedFailureStatus userInfo:@{NSLocalizedDescriptionKey : message}];
         [self.delegate fayeClient:self didFailWithError:error];
     }
 }
@@ -487,7 +505,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 
         if (![message isKindOfClass:[NSDictionary class]]) {
             if ([self.delegate respondsToSelector:@selector(fayeClient:didFailWithError:)]) {
-                NSError *error = [NSError errorWithDomain:MZFayeClientWebSocketErrorDomain code:-100 userInfo:@{NSLocalizedDescriptionKey : @"Message is not kind of NSDicitionary class"}];
+                NSError *error = [NSError errorWithDomain:MZFayeClientBayeuxErrorDomain code:MZFayeClientBayeuxErrorCouldNotParse userInfo:@{NSLocalizedDescriptionKey : @"Message is not kind of NSDicitionary class"}];
                 [self.delegate fayeClient:self didFailWithError:error];
             }
             return;
@@ -568,15 +586,42 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
             }
 
         } else if ([self.openChannelSubscriptions containsObject:fayeMessage.channel]) {
+            
+            if ([self.pendingMessages.allKeys containsObject:fayeMessage.Id] && fayeMessage.successful != nil) {
+                // This is a response to a message we published
+                
+                NSDictionary *handlers = self.pendingMessages[fayeMessage.Id];
+                
+                if ([fayeMessage.successful boolValue]) {
+                    if (handlers[@YES] != nil) {
+                        MZPublishSuccessHandler successHandler = handlers[@YES];
+                        successHandler();
+                    }
+                } else {
+                    if (handlers[@NO] != nil) {
+                        MZPublishFailureHandler failureHandler = handlers[@NO];
+                        
+                        id fayeErrorOrNull = fayeMessage.error;
+                        if (fayeErrorOrNull == nil) fayeErrorOrNull = NSNull.null;
+                        NSError *error = [NSError errorWithDomain:MZFayeClientBayeuxErrorDomain code:MZFayeClientBayeuxErrorReceivedFailureStatus userInfo:@{NSLocalizedDescriptionKey : @"Faye server rejected published message", NSLocalizedFailureReasonErrorKey: fayeErrorOrNull}];
+                        
+                        failureHandler(error);
+                    }
+                }
+                
+                [self.pendingMessages removeObjectForKey:fayeMessage.Id];
+                
+            } else {
+                if (self.subscribedChannels[fayeMessage.channel] &&
+                    self.subscribedChannels[fayeMessage.channel] != [NSNull null]) {
 
-            if (self.subscribedChannels[fayeMessage.channel] &&
-                self.subscribedChannels[fayeMessage.channel] != [NSNull null]) {
+                    MZFayeClientSubscriptionHandler handler = self.subscribedChannels[fayeMessage.channel];
+                    handler(fayeMessage.data);
 
-                MZFayeClientSubscriptionHandler handler = self.subscribedChannels[fayeMessage.channel];
-                handler(fayeMessage.data);
+                } else if ([self.delegate respondsToSelector:@selector(fayeClient:didReceiveMessage:fromChannel:)]) {
+                    [self.delegate fayeClient:self didReceiveMessage:fayeMessage.data fromChannel:fayeMessage.channel];
+                }
 
-            } else if ([self.delegate respondsToSelector:@selector(fayeClient:didReceiveMessage:fromChannel:)]) {
-                [self.delegate fayeClient:self didReceiveMessage:fayeMessage.data fromChannel:fayeMessage.channel];
             }
         } else {
             // No match for channel

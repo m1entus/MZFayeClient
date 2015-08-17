@@ -1,2 +1,2 @@
 platform :ios, '6.0'
-pod 'MZFayeClient', '~> 1.0.0'
+pod 'MZFayeClient', :path => '../'

@@ -35,11 +35,20 @@ extern NSString *const MZFayeClientBayeuxChannelSubscribe;
 extern NSString *const MZFayeClientBayeuxChannelUnsubscribe;
 
 extern NSString *const MZFayeClientWebSocketErrorDomain;
+extern NSString *const MZFayeClientBayeuxErrorDomain;
+
+typedef NS_ENUM(NSInteger, MZFayeClientBayeuxError) {
+    MZFayeClientBayeuxErrorReceivedFailureStatus = -100,
+    MZFayeClientBayeuxErrorCouldNotParse = -101,
+};
 
 extern NSTimeInterval const MZFayeClientDefaultRetryInterval;
 extern NSInteger      const MZFayeClientDefaultMaximumAttempts;
 
 typedef void(^MZFayeClientSubscriptionHandler)(NSDictionary *message);
+
+typedef void (^MZPublishSuccessHandler)();
+typedef void (^MZPublishFailureHandler)(NSError *error);
 
 @protocol MZFayeClientDelegate <NSObject>
 @optional
@@ -132,8 +141,11 @@ typedef void(^MZFayeClientSubscriptionHandler)(NSDictionary *message);
 - (void)setExtension:(NSDictionary *)extension forChannel:(NSString *)channel;
 - (void)removeExtensionForChannel:(NSString *)channel;
 
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel;
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension;
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel DEPRECATED_MSG_ATTRIBUTE("Use sendMessage:toChannel:success:failure:");
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension DEPRECATED_MSG_ATTRIBUTE("Use sendMessage:toChannel:usingExtension:success:failure:");
+
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel success:(MZPublishSuccessHandler)successHandler failure:(MZPublishFailureHandler)failureHandler;
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension success:(MZPublishSuccessHandler)successHandler failure:(MZPublishFailureHandler)failureHandler;
 
 - (void)subscribeToChannel:(NSString *)channel;
 - (void)subscribeToChannel:(NSString *)channel usingBlock:(MZFayeClientSubscriptionHandler)subscriptionHandler;
