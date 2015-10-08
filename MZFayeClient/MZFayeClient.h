@@ -47,8 +47,8 @@ extern NSInteger      const MZFayeClientDefaultMaximumAttempts;
 
 typedef void(^MZFayeClientSubscriptionHandler)(NSDictionary *message);
 
-typedef void (^MZPublishSuccessHandler)();
-typedef void (^MZPublishFailureHandler)(NSError *error);
+typedef void (^MZFayeClientSuccessHandler)();
+typedef void (^MZFayeClientFailureHandler)(NSError *error);
 
 @protocol MZFayeClientDelegate <NSObject>
 @optional
@@ -141,11 +141,11 @@ typedef void (^MZPublishFailureHandler)(NSError *error);
 - (void)setExtension:(NSDictionary *)extension forChannel:(NSString *)channel;
 - (void)removeExtensionForChannel:(NSString *)channel;
 
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel DEPRECATED_MSG_ATTRIBUTE("Use sendMessage:toChannel:success:failure:");
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension DEPRECATED_MSG_ATTRIBUTE("Use sendMessage:toChannel:usingExtension:success:failure:");
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel DEPRECATED_MSG_ATTRIBUTE("Use -sendMessage:toChannel:success:failure:");
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension DEPRECATED_MSG_ATTRIBUTE("Use -sendMessage:toChannel:usingExtension:success:failure:");
 
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel success:(MZPublishSuccessHandler)successHandler failure:(MZPublishFailureHandler)failureHandler;
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension success:(MZPublishSuccessHandler)successHandler failure:(MZPublishFailureHandler)failureHandler;
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
 
 - (void)subscribeToChannel:(NSString *)channel;
 - (void)subscribeToChannel:(NSString *)channel usingBlock:(MZFayeClientSubscriptionHandler)subscriptionHandler;
