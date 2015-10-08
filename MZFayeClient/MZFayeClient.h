@@ -36,10 +36,16 @@ extern NSString *const MZFayeClientBayeuxChannelUnsubscribe;
 
 extern NSString *const MZFayeClientWebSocketErrorDomain;
 extern NSString *const MZFayeClientBayeuxErrorDomain;
+extern NSString *const MZFayeClientErrorDomain;
 
 typedef NS_ENUM(NSInteger, MZFayeClientBayeuxError) {
     MZFayeClientBayeuxErrorReceivedFailureStatus = -100,
     MZFayeClientBayeuxErrorCouldNotParse = -101,
+};
+
+typedef NS_ENUM(NSInteger, MZFayeClientError) {
+    MZFayeClientErrorAlreadySubscribed,
+    MZFayeClientErrorNotSubscribed,
 };
 
 extern NSTimeInterval const MZFayeClientDefaultRetryInterval;
@@ -147,9 +153,12 @@ typedef void (^MZFayeClientFailureHandler)(NSError *error);
 - (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
 - (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
 
-- (void)subscribeToChannel:(NSString *)channel;
-- (void)subscribeToChannel:(NSString *)channel usingBlock:(MZFayeClientSubscriptionHandler)subscriptionHandler;
-- (void)unsubscribeFromChannel:(NSString *)channel;
+- (void)subscribeToChannel:(NSString *)channel DEPRECATED_MSG_ATTRIBUTE("Use -subscribeToChannel:success:failure:receivedMessage:");
+- (void)subscribeToChannel:(NSString *)channel usingBlock:(MZFayeClientSubscriptionHandler)subscriptionHandler DEPRECATED_MSG_ATTRIBUTE("Use -subscribeToChannel:success:failure:receivedMessage:");
+- (void)unsubscribeFromChannel:(NSString *)channel DEPRECATED_MSG_ATTRIBUTE("Use -unsubscribeFromChannel:success:failure:");
+
+- (void)subscribeToChannel:(NSString *)channel success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler receivedMessage:(MZFayeClientSubscriptionHandler)subscriptionHandler;
+- (void)unsubscribeFromChannel:(NSString *)channel success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
 
 - (BOOL)connectToURL:(NSURL *)url;
 - (BOOL)connect;
