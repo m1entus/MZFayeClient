@@ -64,6 +64,8 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 
 @property (nonatomic, readwrite, strong) NSMutableSet *openChannelSubscriptions;
 @property (nonatomic, readwrite, strong) NSMutableSet *pendingChannelSubscriptions;
+@property (nonatomic, readwrite, strong) NSDictionary *connectHandlers;
+@property (nonatomic, readwrite, strong) NSDictionary *disconnectHandlers;
 @property (nonatomic, readwrite, strong) NSMutableDictionary *channelSubscribeHandlers;
 @property (nonatomic, readwrite, strong) NSMutableDictionary *channelUnsubscribeHandlers;
 @property (nonatomic, readwrite, strong) NSMutableDictionary *channelReceivedMessageHandlers;
@@ -373,14 +375,39 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
     if (self.isConnected || self.isWebSocketOpen) {
         return NO;
     }
-
-    [self connectToWebSocket];
-
+    
+    [self connect:nil failure:nil];
+    
     return YES;
+}
+
+- (void)connect:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler
+{
+    if (self.isConnected || self.isWebSocketOpen) {
+        if (successHandler) successHandler();
+        return;
+    }
+    
+    NSMutableDictionary *handlers = [NSMutableDictionary dictionaryWithCapacity:2];
+    if (successHandler != nil) handlers[@YES] = [successHandler copy];
+    if (failureHandler != nil) handlers[@NO] = [failureHandler copy];
+    self.connectHandlers = [NSDictionary dictionaryWithDictionary:handlers];
+    
+    [self connectToWebSocket];
 }
 
 - (void)disconnect
 {
+    [self disconnect:nil failure:nil];
+}
+
+- (void)disconnect:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler
+{
+    NSMutableDictionary *handlers = [NSMutableDictionary dictionaryWithCapacity:2];
+    if (successHandler != nil) handlers[@YES] = [successHandler copy];
+    if (failureHandler != nil) handlers[@NO] = [failureHandler copy];
+    self.disconnectHandlers = [NSDictionary dictionaryWithDictionary:handlers];
+    
     [self sendBayeuxDisconnectMessage];
 }
 
@@ -475,7 +502,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
     } else {
         if (self.shouldRetryConnection && self.retryAttempt < self.maximumRetryAttempts) {
             self.retryAttempt++;
-            [self connect];
+            [self connect:nil failure:nil];
         } else {
             [self invalidateReconnectTimer];
         }
@@ -607,9 +634,19 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
         [self sendBayeuxConnectMessage];
         [self subscribePendingSubscriptions];
         
+        MZFayeClientSuccessHandler successHandler = self.connectHandlers[@YES];
+        if (successHandler != nil) successHandler();
+        
     } else {
         [self didFailWithMessage:[NSString stringWithFormat:@"Faye client couldn't handshake with server. %@",fayeMessage.error]];
+        
+        MZFayeClientFailureHandler failureHandler = self.connectHandlers[@NO];
+        NSError *error = [NSError errorWithDomain:MZFayeClientBayeuxErrorDomain code:MZFayeClientBayeuxErrorReceivedFailureStatus userInfo:@{NSLocalizedDescriptionKey : fayeMessage.error}];
+        
+        if (failureHandler != nil) failureHandler(error);
     }
+    
+    self.connectHandlers = nil;
 }
 
 - (void)handleChannelConnect:(MZFayeMessage *)fayeMessage
@@ -617,8 +654,18 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
     if ([fayeMessage.successful boolValue]) {
         self.connected = YES;
         [self sendBayeuxConnectMessage];
+        
+        // Note: success handler block is not called yet; we wait for handshake
     } else {
         [self didFailWithMessage:[NSString stringWithFormat:@"Faye client couldn't connect to server. %@",fayeMessage.error]];
+        
+        MZFayeClientFailureHandler failureHandler = self.connectHandlers[@NO];
+        NSError *error = [NSError errorWithDomain:MZFayeClientBayeuxErrorDomain code:MZFayeClientBayeuxErrorReceivedFailureStatus userInfo:@{NSLocalizedDescriptionKey : fayeMessage.error}];
+        
+        if (failureHandler != nil) failureHandler(error);
+        
+        // Don't allow failure handshake to fire twice
+        self.connectHandlers = nil;
     }
 }
 
@@ -633,9 +680,19 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
         if ([self.delegate respondsToSelector:@selector(fayeClient:didDisconnectWithError:)]) {
             [self.delegate fayeClient:self didDisconnectWithError:nil];
         }
+        
+        MZFayeClientSuccessHandler successHandler = self.disconnectHandlers[@YES];
+        if (successHandler != nil) successHandler();
     } else {
         [self didFailWithMessage:[NSString stringWithFormat:@"Faye client couldn't disconnect from server. %@",fayeMessage.error]];
+        
+        MZFayeClientFailureHandler failureHandler = self.disconnectHandlers[@NO];
+        NSError *error = [NSError errorWithDomain:MZFayeClientBayeuxErrorDomain code:MZFayeClientBayeuxErrorReceivedFailureStatus userInfo:@{NSLocalizedDescriptionKey : fayeMessage.error}];
+        
+        if (failureHandler != nil) failureHandler(error);
     }
+    
+    self.disconnectHandlers = nil;
 }
 
 - (void)handleChannelSubscribe:(MZFayeMessage *)fayeMessage

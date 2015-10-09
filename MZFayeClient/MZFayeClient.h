@@ -138,8 +138,8 @@ typedef void (^MZFayeClientFailureHandler)(NSError *error);
  */
 @property (nonatomic, weak) id <MZFayeClientDelegate> delegate;
 
-- (instancetype)init;
-+ (instancetype)client;
+- (instancetype)init DEPRECATED_MSG_ATTRIBUTE("Use -initWithURL:");
++ (instancetype)client DEPRECATED_MSG_ATTRIBUTE("Use +clientWithURL:");
 
 - (instancetype)initWithURL:(NSURL *)url;
 + (instancetype)clientWithURL:(NSURL *)url;
@@ -160,9 +160,13 @@ typedef void (^MZFayeClientFailureHandler)(NSError *error);
 - (void)subscribeToChannel:(NSString *)channel success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler receivedMessage:(MZFayeClientSubscriptionHandler)subscriptionHandler;
 - (void)unsubscribeFromChannel:(NSString *)channel success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
 
-- (BOOL)connectToURL:(NSURL *)url;
-- (BOOL)connect;
+- (BOOL)connectToURL:(NSURL *)url DEPRECATED_MSG_ATTRIBUTE("Use -connect:failure:");
+- (BOOL)connect DEPRECATED_MSG_ATTRIBUTE("Use -connect:failure:");
 
-- (void)disconnect;
+- (void)connect:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
+
+- (void)disconnect DEPRECATED_MSG_ATTRIBUTE("Use -disconnect:failure:");
+
+- (void)disconnect:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
 
 @end
