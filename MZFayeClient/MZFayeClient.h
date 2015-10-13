@@ -36,10 +36,16 @@ extern NSString *const MZFayeClientBayeuxChannelUnsubscribe;
 
 extern NSString *const MZFayeClientWebSocketErrorDomain;
 extern NSString *const MZFayeClientBayeuxErrorDomain;
+extern NSString *const MZFayeClientErrorDomain;
 
 typedef NS_ENUM(NSInteger, MZFayeClientBayeuxError) {
     MZFayeClientBayeuxErrorReceivedFailureStatus = -100,
     MZFayeClientBayeuxErrorCouldNotParse = -101,
+};
+
+typedef NS_ENUM(NSInteger, MZFayeClientError) {
+    MZFayeClientErrorAlreadySubscribed,
+    MZFayeClientErrorNotSubscribed,
 };
 
 extern NSTimeInterval const MZFayeClientDefaultRetryInterval;
@@ -47,8 +53,8 @@ extern NSInteger      const MZFayeClientDefaultMaximumAttempts;
 
 typedef void(^MZFayeClientSubscriptionHandler)(NSDictionary *message);
 
-typedef void (^MZPublishSuccessHandler)();
-typedef void (^MZPublishFailureHandler)(NSError *error);
+typedef void (^MZFayeClientSuccessHandler)();
+typedef void (^MZFayeClientFailureHandler)(NSError *error);
 
 @protocol MZFayeClientDelegate <NSObject>
 @optional
@@ -132,8 +138,8 @@ typedef void (^MZPublishFailureHandler)(NSError *error);
  */
 @property (nonatomic, weak) id <MZFayeClientDelegate> delegate;
 
-- (instancetype)init;
-+ (instancetype)client;
+- (instancetype)init DEPRECATED_MSG_ATTRIBUTE("Use -initWithURL:");
++ (instancetype)client DEPRECATED_MSG_ATTRIBUTE("Use +clientWithURL:");
 
 - (instancetype)initWithURL:(NSURL *)url;
 + (instancetype)clientWithURL:(NSURL *)url;
@@ -141,19 +147,26 @@ typedef void (^MZPublishFailureHandler)(NSError *error);
 - (void)setExtension:(NSDictionary *)extension forChannel:(NSString *)channel;
 - (void)removeExtensionForChannel:(NSString *)channel;
 
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel DEPRECATED_MSG_ATTRIBUTE("Use sendMessage:toChannel:success:failure:");
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension DEPRECATED_MSG_ATTRIBUTE("Use sendMessage:toChannel:usingExtension:success:failure:");
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel DEPRECATED_MSG_ATTRIBUTE("Use -sendMessage:toChannel:success:failure:");
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension DEPRECATED_MSG_ATTRIBUTE("Use -sendMessage:toChannel:usingExtension:success:failure:");
 
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel success:(MZPublishSuccessHandler)successHandler failure:(MZPublishFailureHandler)failureHandler;
-- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension success:(MZPublishSuccessHandler)successHandler failure:(MZPublishFailureHandler)failureHandler;
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
+- (void)sendMessage:(NSDictionary *)message toChannel:(NSString *)channel usingExtension:(NSDictionary *)extension success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
 
-- (void)subscribeToChannel:(NSString *)channel;
-- (void)subscribeToChannel:(NSString *)channel usingBlock:(MZFayeClientSubscriptionHandler)subscriptionHandler;
-- (void)unsubscribeFromChannel:(NSString *)channel;
+- (void)subscribeToChannel:(NSString *)channel DEPRECATED_MSG_ATTRIBUTE("Use -subscribeToChannel:success:failure:receivedMessage:");
+- (void)subscribeToChannel:(NSString *)channel usingBlock:(MZFayeClientSubscriptionHandler)subscriptionHandler DEPRECATED_MSG_ATTRIBUTE("Use -subscribeToChannel:success:failure:receivedMessage:");
+- (void)unsubscribeFromChannel:(NSString *)channel DEPRECATED_MSG_ATTRIBUTE("Use -unsubscribeFromChannel:success:failure:");
 
-- (BOOL)connectToURL:(NSURL *)url;
-- (BOOL)connect;
+- (void)subscribeToChannel:(NSString *)channel success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler receivedMessage:(MZFayeClientSubscriptionHandler)subscriptionHandler;
+- (void)unsubscribeFromChannel:(NSString *)channel success:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
 
-- (void)disconnect;
+- (BOOL)connectToURL:(NSURL *)url DEPRECATED_MSG_ATTRIBUTE("Use -connect:failure:");
+- (BOOL)connect DEPRECATED_MSG_ATTRIBUTE("Use -connect:failure:");
+
+- (void)connect:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
+
+- (void)disconnect DEPRECATED_MSG_ATTRIBUTE("Use -disconnect:failure:");
+
+- (void)disconnect:(MZFayeClientSuccessHandler)successHandler failure:(MZFayeClientFailureHandler)failureHandler;
 
 @end
