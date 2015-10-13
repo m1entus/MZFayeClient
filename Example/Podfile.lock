@@ -1,20 +1,17 @@
 PODS:
-  - Base64 (1.0.1)
-  - MZFayeClient (1.0.1):
-    - Base64 (~> 1.0.1)
-    - SocketRocket (~> 0.3.1-beta2)
-  - SocketRocket (0.3.1-beta2)
+  - MZFayeClient (1.0.3):
+    - SocketRocket
+  - SocketRocket (0.4.1)
 
 DEPENDENCIES:
   - MZFayeClient (from `../`)
 
 EXTERNAL SOURCES:
   MZFayeClient:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  Base64: 4924bf3ca6fa559a5161ef717291bd450eb7bd1a
-  MZFayeClient: 0249736408974dc5edb268bf3b96c579a8089450
-  SocketRocket: 7284ab9370a06c99aba92b2fe3a32aedd0f9a6fa
+  MZFayeClient: ac3defb0026d26f025444eeb021117be9cab4642
+  SocketRocket: ee0b5c34182d37bb4f1f8d628bbe737718126daa
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0.rc.1

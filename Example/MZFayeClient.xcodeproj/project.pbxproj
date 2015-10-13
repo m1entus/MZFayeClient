@@ -21,7 +21,7 @@
 		062344B418592B2F0052DB3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449618592B2F0052DB3E /* UIKit.framework */; };
 		062344BC18592B2F0052DB3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 062344BA18592B2F0052DB3E /* InfoPlist.strings */; };
 		062344BE18592B2F0052DB3E /* MZFayeClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 062344BD18592B2F0052DB3E /* MZFayeClientTests.m */; };
-		E00C7DE5D741401BB50E0A39 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A15FC3517F64F34939D2995 /* libPods.a */; };
+		AC3F5EA0A83A9C9D73B50308 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C549696D846C55D76912AB7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,7 @@
 		062344B918592B2F0052DB3E /* MZFayeClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MZFayeClientTests-Info.plist"; sourceTree = "<group>"; };
 		062344BB18592B2F0052DB3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		062344BD18592B2F0052DB3E /* MZFayeClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZFayeClientTests.m; sourceTree = "<group>"; };
-		6A15FC3517F64F34939D2995 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C549696D846C55D76912AB7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C360882D754D9347EFBA7D9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D8A6F6A8594C720BFA45AB7A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,7 +67,7 @@
 				0623449518592B2F0052DB3E /* CoreGraphics.framework in Frameworks */,
 				0623449718592B2F0052DB3E /* UIKit.framework in Frameworks */,
 				0623449318592B2F0052DB3E /* Foundation.framework in Frameworks */,
-				E00C7DE5D741401BB50E0A39 /* libPods.a in Frameworks */,
+				AC3F5EA0A83A9C9D73B50308 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +111,7 @@
 				0623449418592B2F0052DB3E /* CoreGraphics.framework */,
 				0623449618592B2F0052DB3E /* UIKit.framework */,
 				062344B118592B2F0052DB3E /* XCTest.framework */,
-				6A15FC3517F64F34939D2995 /* libPods.a */,
+				2C549696D846C55D76912AB7 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -180,6 +180,7 @@
 				0623448C18592B2F0052DB3E /* Frameworks */,
 				0623448D18592B2F0052DB3E /* Resources */,
 				91949169BE924C7F9943379A /* Copy Pods Resources */,
+				E70A8253E716822722C18C1A /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -215,7 +216,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MZ;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Michał Zaborowski";
 				TargetAttributes = {
 					062344AF18592B2F0052DB3E = {
@@ -294,6 +295,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E70A8253E716822722C18C1A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -357,7 +373,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -372,6 +387,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -396,7 +412,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -435,6 +450,7 @@
 				GCC_PREFIX_HEADER = "MZFayeClient/MZFayeClient-Prefix.pch";
 				INFOPLIST_FILE = "MZFayeClient/MZFayeClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.whitecode.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -450,6 +466,7 @@
 				GCC_PREFIX_HEADER = "MZFayeClient/MZFayeClient-Prefix.pch";
 				INFOPLIST_FILE = "MZFayeClient/MZFayeClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.whitecode.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -458,7 +475,6 @@
 		062344C518592B2F0052DB3E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MZFayeClient.app/MZFayeClient";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -472,6 +488,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "MZFayeClientTests/MZFayeClientTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.whitecode.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -481,7 +498,6 @@
 		062344C618592B2F0052DB3E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MZFayeClient.app/MZFayeClient";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -491,6 +507,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MZFayeClient/MZFayeClient-Prefix.pch";
 				INFOPLIST_FILE = "MZFayeClientTests/MZFayeClientTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.whitecode.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

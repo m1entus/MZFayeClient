@@ -25,7 +25,6 @@
 
 #import "MZFayeClient.h"
 #import "MZFayeMessage.h"
-#import <MF_Base64Additions.h>
 
 NSString *const MZFayeClientBayeuxChannelHandshake = @"/meta/handshake";
 NSString *const MZFayeClientBayeuxChannelConnect = @"/meta/connect";
@@ -141,7 +140,14 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 - (instancetype)init
 {
     if (self = [super init]) {
+        [NSException raise:@"MZFayeClient" format:@"Use -initWithURL:"];
+    }
+    return self;
+}
 
+- (instancetype)initWithURL:(NSURL *)url
+{
+    if (self = [super init]) {
         _channelExtensions = [NSMutableDictionary dictionary];
         _channelSubscribeHandlers = [NSMutableDictionary dictionary];
         _channelUnsubscribeHandlers = [NSMutableDictionary dictionary];
@@ -154,21 +160,10 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
         _shouldRetryConnection = YES;
         _sentMessageCount = 0;
         _retryAttempt = 0;
-    }
-    return self;
-}
-
-- (instancetype)initWithURL:(NSURL *)url
-{
-    if (self = [self init]) {
+        
         _url = url;
     }
     return self;
-}
-
-+ (instancetype)client
-{
-    return [[[self class] alloc] init];
 }
 
 + (instancetype)clientWithURL:(NSURL *)url
@@ -326,7 +321,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
 {
     self.sentMessageCount++;
 
-    return [[NSString stringWithFormat:@"%ld", (long)self.sentMessageCount] base64String];
+    return [[[NSString stringWithFormat:@"%ld", (long)self.sentMessageCount] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
 }
 
 #pragma mark - Public methods

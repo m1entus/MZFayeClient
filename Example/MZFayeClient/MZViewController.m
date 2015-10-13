@@ -21,7 +21,7 @@
 
     self.client = [[MZFayeClient alloc] initWithURL:[NSURL URLWithString:@"ws://localhost:9292/faye"]];
 
-    [self.client subscribeToChannel:@"/server" usingBlock:^(NSDictionary *message) {
+    [self.client subscribeToChannel:@"/server" success:nil failure:nil receivedMessage:^(NSDictionary *message) {
         NSLog(@"Server %@",message);
     }];
 
@@ -39,16 +39,16 @@
 }
 
 - (IBAction)connect:(id)sender {
-    [self.client connect];
+    [self.client connect:nil failure:nil];
 }
 
 - (IBAction)disconnect:(id)sender {
-    [self.client disconnect];
+    [self.client disconnect:nil failure:nil];
 }
 
 - (IBAction)send:(id)sender
 {
-    [self.client sendMessage:@{@"text": self.messageTextField.text} toChannel:@"/browser"];
+    [self.client sendMessage:@{@"text": self.messageTextField.text} toChannel:@"/browser" success:nil failure:nil];
 }
 
 - (void)fayeClient:(MZFayeClient *)client didConnectToURL:(NSURL *)url
