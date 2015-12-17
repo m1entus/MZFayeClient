@@ -26,7 +26,7 @@ self.client = [[MZFayeClient alloc] initWithURL:[NSURL URLWithString:@"ws://loca
 [self.client connect:^{
     [self.client sendMessage:@{@"text": @"hello!"} toChannel:@"/server" success:^{
         NSLog(@"Message sent successfully.");
-    } failure:^(NSError *error)error {
+    } failure:^(NSError *error) {
         NSLog(@"Error sending message: %@", error.userInfo);
     }];
 } failure:^(NSError *error) {
