@@ -324,6 +324,35 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
     return [[[NSString stringWithFormat:@"%ld", (long)self.sentMessageCount] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
 }
 
+- (NSArray *)channelsWithWildcardsForChannel:(NSString *)channel
+{
+    static NSCharacterSet *separator = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        separator = [NSCharacterSet characterSetWithCharactersInString:@"/"];
+    });
+    
+    NSArray *segments = [channel componentsSeparatedByCharactersInSet:separator];
+    if (segments.count < 2)
+        return @[];
+    
+    NSMutableArray *wildcards = [NSMutableArray arrayWithCapacity:segments.count];
+    NSMutableString *wildcard = [NSMutableString new];
+    
+    [wildcards addObject:@"/**"];
+    
+    for (NSInteger i = 1, count = segments.count - 1; i < count; ++i) {
+        NSString* segment = segments[i];
+        
+        [wildcard appendFormat:@"/%@", segment];
+        [wildcards addObject:[wildcard stringByAppendingString:@"/**"]];
+    }
+    
+    [wildcards addObject:[wildcard stringByAppendingString:@"/*"]];
+    [wildcards addObject:channel];
+    return [wildcards copy];
+}
+
 #pragma mark - Public methods
 
 - (void)setExtension:(NSDictionary *)extension forChannel:(NSString *)channel
@@ -596,20 +625,18 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
             
             [self handleChannelUnsubscribe:fayeMessage];
 
-        } else if ([self.openChannelSubscriptions containsObject:fayeMessage.channel]) {
+        } else if (self.sendMessageHandlers[fayeMessage.Id] && fayeMessage.successful != nil) {
             
-            if ([self.sendMessageHandlers.allKeys containsObject:fayeMessage.Id] && fayeMessage.successful != nil) {
-                
-                // This is a response to a message we published
-                [self handleMessageResponse:fayeMessage];
-                
-            } else {
-                
-                [self handleChannelReceivedMessage:fayeMessage];
-
-            }
+            // This is a response to a message we published
+            [self handleMessageResponse:fayeMessage];
         } else {
-            // No match for channel
+
+            NSArray *channelsWithWildcards = [self channelsWithWildcardsForChannel:fayeMessage.channel];
+            for (NSString* channel in channelsWithWildcards) {
+                if ([self.openChannelSubscriptions containsObject:channel]) {
+                    [self handleChannelReceivedMessage:fayeMessage forChannel:channel];
+                }
+            }
         }
 
     }
@@ -783,12 +810,12 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
     [self.sendMessageHandlers removeObjectForKey:fayeMessage.Id];
 }
 
-- (void)handleChannelReceivedMessage:(MZFayeMessage *)fayeMessage
+- (void)handleChannelReceivedMessage:(MZFayeMessage *)fayeMessage forChannel:(NSString*)channel
 {
-    if (self.channelReceivedMessageHandlers[fayeMessage.channel] &&
-        self.channelReceivedMessageHandlers[fayeMessage.channel] != [NSNull null]) {
+    id channelReceivedMessageHandler = self.channelReceivedMessageHandlers[channel];
+    if (channelReceivedMessageHandler && channelReceivedMessageHandler != [NSNull null]) {
         
-        MZFayeClientSubscriptionHandler handler = self.channelReceivedMessageHandlers[fayeMessage.channel];
+        MZFayeClientSubscriptionHandler handler = channelReceivedMessageHandler;
         handler(fayeMessage.data);
         
     } else if ([self.delegate respondsToSelector:@selector(fayeClient:didReceiveMessage:fromChannel:)]) {
