@@ -21,7 +21,7 @@
 		062344B418592B2F0052DB3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0623449618592B2F0052DB3E /* UIKit.framework */; };
 		062344BC18592B2F0052DB3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 062344BA18592B2F0052DB3E /* InfoPlist.strings */; };
 		062344BE18592B2F0052DB3E /* MZFayeClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 062344BD18592B2F0052DB3E /* MZFayeClientTests.m */; };
-		AC3F5EA0A83A9C9D73B50308 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C549696D846C55D76912AB7 /* libPods.a */; };
+		4BE75274C4EFC5098BCF8FB1 /* libPods-MZFayeClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1003FF63DD73B5AA7A4034 /* libPods-MZFayeClient.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,9 +54,9 @@
 		062344B918592B2F0052DB3E /* MZFayeClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MZFayeClientTests-Info.plist"; sourceTree = "<group>"; };
 		062344BB18592B2F0052DB3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		062344BD18592B2F0052DB3E /* MZFayeClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZFayeClientTests.m; sourceTree = "<group>"; };
-		2C549696D846C55D76912AB7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C360882D754D9347EFBA7D9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		D8A6F6A8594C720BFA45AB7A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5392EBBE3E90D49AEF6BD0A7 /* Pods-MZFayeClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZFayeClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-MZFayeClient/Pods-MZFayeClient.release.xcconfig"; sourceTree = "<group>"; };
+		5D1003FF63DD73B5AA7A4034 /* libPods-MZFayeClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MZFayeClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE5FA0CEEA26CA17D7BF0F5D /* Pods-MZFayeClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MZFayeClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MZFayeClient/Pods-MZFayeClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +67,7 @@
 				0623449518592B2F0052DB3E /* CoreGraphics.framework in Frameworks */,
 				0623449718592B2F0052DB3E /* UIKit.framework in Frameworks */,
 				0623449318592B2F0052DB3E /* Foundation.framework in Frameworks */,
-				AC3F5EA0A83A9C9D73B50308 /* libPods.a in Frameworks */,
+				4BE75274C4EFC5098BCF8FB1 /* libPods-MZFayeClient.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +91,7 @@
 				062344B718592B2F0052DB3E /* MZFayeClientTests */,
 				0623449118592B2F0052DB3E /* Frameworks */,
 				0623449018592B2F0052DB3E /* Products */,
-				17FDEC09305CD15621E03900 /* Pods */,
+				D4E87DCA606F278DC688BA61 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,7 +111,7 @@
 				0623449418592B2F0052DB3E /* CoreGraphics.framework */,
 				0623449618592B2F0052DB3E /* UIKit.framework */,
 				062344B118592B2F0052DB3E /* XCTest.framework */,
-				2C549696D846C55D76912AB7 /* libPods.a */,
+				5D1003FF63DD73B5AA7A4034 /* libPods-MZFayeClient.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,11 +159,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		17FDEC09305CD15621E03900 /* Pods */ = {
+		D4E87DCA606F278DC688BA61 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D8A6F6A8594C720BFA45AB7A /* Pods.debug.xcconfig */,
-				8C360882D754D9347EFBA7D9 /* Pods.release.xcconfig */,
+				FE5FA0CEEA26CA17D7BF0F5D /* Pods-MZFayeClient.debug.xcconfig */,
+				5392EBBE3E90D49AEF6BD0A7 /* Pods-MZFayeClient.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -175,12 +175,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 062344C118592B2F0052DB3E /* Build configuration list for PBXNativeTarget "MZFayeClient" */;
 			buildPhases = (
-				2581D574D9DA431491664F58 /* Check Pods Manifest.lock */,
+				78C22790C486DDEFABE07046 /* [CP] Check Pods Manifest.lock */,
 				0623448B18592B2F0052DB3E /* Sources */,
 				0623448C18592B2F0052DB3E /* Frameworks */,
 				0623448D18592B2F0052DB3E /* Resources */,
-				91949169BE924C7F9943379A /* Copy Pods Resources */,
-				E70A8253E716822722C18C1A /* Embed Pods Frameworks */,
+				7D9B2A1A2A245297E4639D0F /* [CP] Embed Pods Frameworks */,
+				BF1F5EE8EA32FD94C2E277B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -265,14 +265,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2581D574D9DA431491664F58 /* Check Pods Manifest.lock */ = {
+		78C22790C486DDEFABE07046 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,34 +280,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		91949169BE924C7F9943379A /* Copy Pods Resources */ = {
+		7D9B2A1A2A245297E4639D0F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZFayeClient/Pods-MZFayeClient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E70A8253E716822722C18C1A /* Embed Pods Frameworks */ = {
+		BF1F5EE8EA32FD94C2E277B4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MZFayeClient/Pods-MZFayeClient-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -442,7 +442,7 @@
 		};
 		062344C218592B2F0052DB3E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8A6F6A8594C720BFA45AB7A /* Pods.debug.xcconfig */;
+			baseConfigurationReference = FE5FA0CEEA26CA17D7BF0F5D /* Pods-MZFayeClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -458,7 +458,7 @@
 		};
 		062344C318592B2F0052DB3E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C360882D754D9347EFBA7D9 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 5392EBBE3E90D49AEF6BD0A7 /* Pods-MZFayeClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
