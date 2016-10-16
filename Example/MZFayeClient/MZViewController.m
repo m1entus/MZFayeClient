@@ -21,8 +21,8 @@
 
     self.client = [[MZFayeClient alloc] initWithURL:[NSURL URLWithString:@"ws://localhost:9292/faye"]];
 
-    [self.client subscribeToChannel:@"/server" success:nil failure:nil receivedMessage:^(NSDictionary *message) {
-        NSLog(@"Server %@",message);
+    [self.client subscribeToChannel:@"/server" success:nil failure:nil receivedMessage:^(NSDictionary *message, NSDictionary *extension) {
+        NSLog(@"Server message %@,\nextension: %@",message,extension);
     }];
 
 //    [self.client subscribeToChannel:@"/browser" usingBlock:^(NSDictionary *message) {
@@ -51,21 +51,21 @@
     [self.client sendMessage:@{@"text": self.messageTextField.text} toChannel:@"/browser" success:nil failure:nil];
 }
 
-- (void)fayeClient:(MZFayeClient *)client didConnectToURL:(NSURL *)url
+- (void)fayeClient:(MZFayeClient *)client didConnectToURL:(NSURL *)url extension:(NSDictionary *)extension
 {
-    NSLog(@"%@",url);
+    NSLog(@"%@\n%@",url,extension);
 }
 - (void)fayeClient:(MZFayeClient *)client didDisconnectWithError:(NSError *)error
 {
     NSLog(@"%@",error);
 }
-- (void)fayeClient:(MZFayeClient *)client didUnsubscribeFromChannel:(NSString *)channel
+- (void)fayeClient:(MZFayeClient *)client didUnsubscribeFromChannel:(NSString *)channel extension:(NSDictionary *)extension
 {
-    NSLog(@"%@",channel);
+    NSLog(@"%@\n%@",channel,extension);
 }
-- (void)fayeClient:(MZFayeClient *)client didSubscribeToChannel:(NSString *)channel
+- (void)fayeClient:(MZFayeClient *)client didSubscribeToChannel:(NSString *)channel extension:(NSDictionary *)extension
 {
-    NSLog(@"%@",channel);
+    NSLog(@"%@\n%@",channel,extension);
 }
 - (void)fayeClient:(MZFayeClient *)client didFailWithError:(NSError *)error
 {
@@ -76,9 +76,9 @@
 {
     NSLog(@"%@",error);
 }
-- (void)fayeClient:(MZFayeClient *)client didReceiveMessage:(NSDictionary *)messageData fromChannel:(NSString *)channel
+- (void)fayeClient:(MZFayeClient *)client didReceiveMessage:(NSDictionary *)messageData fromChannel:(NSString *)channel extension:(NSDictionary *)extension
 {
-    NSLog(@"%@",channel);
+    NSLog(@"%@\n%@",channel,extension);
 }
 
 
