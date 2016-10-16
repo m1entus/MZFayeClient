@@ -740,7 +740,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
     if ([fayeMessage.successful boolValue]) {
         [self.openChannelSubscriptions addObject:fayeMessage.subscription];
         
-        if ([self.delegate respondsToSelector:@selector(fayeClient:didSubscribeToChannel:)]) {
+        if ([self.delegate respondsToSelector:@selector(fayeClient:didSubscribeToChannel:extension:)]) {
             [self.delegate fayeClient:self didSubscribeToChannel:fayeMessage.subscription extension:fayeMessage.ext];
         }
         
@@ -775,7 +775,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
         [self.pendingChannelSubscriptions removeObject:fayeMessage.subscription];
         [self.openChannelSubscriptions removeObject:fayeMessage.subscription];
         
-        if ([self.delegate respondsToSelector:@selector(fayeClient:didUnsubscribeFromChannel:)]) {
+        if ([self.delegate respondsToSelector:@selector(fayeClient:didUnsubscribeFromChannel:extension:)]) {
             [self.delegate fayeClient:self didUnsubscribeFromChannel:fayeMessage.subscription extension:fayeMessage.ext];
         }
         
@@ -832,7 +832,7 @@ NSInteger const MZFayeClientDefaultMaximumAttempts = 5;
         MZFayeClientSubscriptionHandler handler = channelReceivedMessageHandler;
         handler(fayeMessage.data, fayeMessage.ext);
         
-    } else if ([self.delegate respondsToSelector:@selector(fayeClient:didReceiveMessage:fromChannel:)]) {
+    } else if ([self.delegate respondsToSelector:@selector(fayeClient:didReceiveMessage:fromChannel:extension:)]) {
         [self.delegate fayeClient:self didReceiveMessage:fayeMessage.data fromChannel:fayeMessage.channel extension:fayeMessage.ext];
     }
 }
